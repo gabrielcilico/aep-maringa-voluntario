@@ -25,6 +25,10 @@ export class CreateVoluntaryTable1623723814787 implements MigrationInterface {
                     isUnique: true
                 },
                 {
+                    name: "photo",
+                    type: "varchar"
+                },
+                {
                     name: "birthdate",
                     type: "date"
                 },
