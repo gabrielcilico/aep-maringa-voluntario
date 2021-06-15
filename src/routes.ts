@@ -1,9 +1,9 @@
 import { Router } from 'express'
+import voluntaryController from './voluntary/voluntary-controller'
 
 const routes = Router()
 
-routes.post('/users', (req, res) => {
-  return res.status(201).send()
-})
+routes.post('/voluntary', voluntaryController.save)
+routes.put('/voluntary', voluntaryController.update)
 
 export { routes }

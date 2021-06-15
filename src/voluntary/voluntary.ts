@@ -1,19 +1,19 @@
-import { uuid } from 'uuidv4'
-
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+@Entity('voluntary')
 export class Voluntary {
   
-  public readonly id: string
+  @PrimaryGeneratedColumn('uuid')
+  public id: string
+
+  @Column()
   public name: string
+
+  @Column()
   public email: string
+
+  @Column()
   public birthdate: Date
+
+  @Column()
   public gender: string
-
-  constructor(props: Omit<Voluntary, 'id'>, id?: string) {
-    Object.assign(this, props);
-
-    if (!id) {
-      this.id = uuid();
-    }
-  }
-
 }
