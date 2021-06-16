@@ -1,30 +1,30 @@
-import { Voluntary } from "./voluntary";
-import { VoluntaryRepository } from "./voluntary-repository";
+import { Voluntary } from "./voluntary-model";
 import { Request, Response } from "express";
+import { getRepository } from "typeorm";
+class VoluntaryController {
 
-export class VoluntaryController {
+  async save(req: Request, res: Response) {
+    let repository = getRepository(Voluntary)
+    let {name, email, photo, birthdate, gender} = req.body
+    let userExists = await repository.findOne({ where: { email } })
+    
+    if (userExists) {
+      return res.status(409).send({ message: "user already exists"})
+    }
 
-  public repository: VoluntaryRepository
-  
-  contructor() {
-    this.repository = new VoluntaryRepository();
-  }
-
-  async save(req: Request, res: Response): Voluntary {
-    let {name, email, birthdate, gender} = req.body
-    let voluntary: Voluntary = new Voluntary({name, email, birthdate, gender})
-    return await this.repository.save(voluntary)
+    const voluntary = repository.create({ name, email, photo, birthdate, gender})
+    await repository.save(voluntary)
+    return res.status(200).send(voluntary)
   }
 
   async update(req: Request, res: Response) {
-    let id: string = req.params.id
-    let voluntary: Voluntary = this.repository.get(id)
+    let repository = getRepository(Voluntary)
+    let {name, email, photo, birthdate, gender} = req.body
+    const voluntary = await repository.findOne({ where: { email } })
 
     if (!voluntary) {
-      res.status(404).send({ error: "voluntary not found" })
+      return res.status(404).send({ error: "voluntary not found" })
     }
-
-    let {name, email, birthdate, gender} = req.body
 
     if (name) {
       voluntary.name = name
@@ -32,6 +32,10 @@ export class VoluntaryController {
 
     if (email) {
       voluntary.email = email
+    }
+
+    if (photo) {
+      voluntary.photo = photo
     }
 
     if (birthdate) {
@@ -42,6 +46,25 @@ export class VoluntaryController {
       voluntary.gender = gender
     }
 
-    await this.repository.update(voluntary)
+    await repository.save(voluntary)
+    return res.status(200).send(voluntary)
+  }
+
+  async getAll(req: Request, res: Response) {
+    let repository = getRepository(Voluntary)
+    let [ voluntaries ] = await repository.findAndCount()
+    return res.status(200).send(voluntaries)
+  }
+
+  async getByEmail(req: Request, res: Response) {
+    let repository = getRepository(Voluntary)
+    let email = req.params.email
+    const voluntary = await repository.findOne({ where: { email } })
+    if (!voluntary) {
+      return res.status(404).send({ error: "voluntary not found" })
+    }
+    return res.status(200).send(voluntary)
   }
 }
+
+export default new VoluntaryController()
