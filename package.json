@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "tsnd --transpile-only --respawn --ignore-watch node_modules src/server.ts",
-    "typeorm": "npx tsnd ./node_modules/typeorm/cli.js"
+    "dev": "tsnd --transpile-only --respawn --ignore-watch node_modules src/server.ts",
+    "typeorm": "npx tsnd ./node_modules/typeorm/cli.js",
+    "build": "tsc",
+    "start": "node dist/server.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +24,7 @@
     "@types/cors": "^2.8.10",
     "@types/express": "^4.17.11",
     "cors": "^2.8.5",
+    "dotenv": "^8.6.0",
     "express": "^4.17.1",
     "pg": "^8.6.0",
     "reflect-metadata": "^0.1.13",
