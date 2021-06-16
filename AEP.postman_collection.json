@@ -1,0 +1,260 @@
+{
+	"info": {
+		"_postman_id": "21a62c6a-586f-470e-907a-912a19af5a11",
+		"name": "AEP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Voluntary",
+			"item": [
+				{
+					"name": "Create voluntary",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Emanuel Conte\",\r\n    \"email\": \"contecmg@gmail.com\",\r\n    \"photo\": \"https://t3.ftcdn.net/jpg/03/91/19/22/360_F_391192211_2w5pQpFV1aozYQhcIw3FqA35vuTxJKrB.jpg\",\r\n    \"birthdate\": \"2012-04-23T18:25:43.511Z\",\r\n    \"gender\": \"male\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/voluntary",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"voluntary"
+							]
+						},
+						"description": "Used to create new voluntaries"
+					},
+					"response": []
+				},
+				{
+					"name": "Update voluntary",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Gabriel Cilico Leite\",\r\n    \"email\": \"cilico@gmail.com\",\r\n    \"photo\": \"https://t3.ftcdn.net/jpg/03/91/19/22/360_F_391192211_2w5pQpFV1aozYQhcIw3FqA35vuTxJKrB.jpg\",\r\n    \"birthdate\": \"2012-04-23T18:25:43.511Z\",\r\n    \"gender\": \"male\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/voluntary",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"voluntary"
+							]
+						},
+						"description": "Used to update voluntary if exists"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all voluntaries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/voluntary",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"voluntary"
+							]
+						},
+						"description": "Used to get all voluntaries"
+					},
+					"response": []
+				},
+				{
+					"name": "Get by email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/voluntary/jordao@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"voluntary",
+								"jordao@gmail.com"
+							]
+						},
+						"description": "used to get voluntary by email"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Organization",
+			"item": [
+				{
+					"name": "Create organization",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Amigos da Escola\",\r\n    \"email\": \"amigosdaescola@gmail.com\",\r\n    \"photo\": \"https://filantropia.maringa.com/storage/estabelecimentos/ioFXLz-foto-amigos-da-escola.jpg\",\r\n    \"description\": \"É uma iniciativa destinada a fortalecer a participação comunitária no esforço de melhoria da escola pública. Desenvolvido pelo Projeto Brasil 500 Anos em conjunto com o • na estimulação das escolas para sua abertura à comunidade; • na convocação da sociedade brasileira a participar de ações de voluntariado; • na ampliação de parcerias aproximando e a comunidade da vida escolar. AEROPORTOC.E. João XXIII - Ensino Fundamental e Médio\",\r\n    \"street\": \"Av: Monteiro Lobato\",\r\n    \"number\": 695,\r\n    \"zipCode\": \"87050-280\",\r\n    \"phone\": \"(00) 00000-0000\",\r\n    \"category\": \"educação\",\r\n    \"neighborhood\": \"Zona 7\",\r\n    \"complement\": \"Próximo ao Shopping Avenida Center.\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/organization",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"organization"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update organization",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Amigos da Escola\",\r\n    \"email\": \"amigosdaescola@gmail.com\",\r\n    \"photo\": \"https://filantropia.maringa.com/storage/estabelecimentos/ioFXLz-foto-amigos-da-escola.jpg\",\r\n    \"description\": \"É uma iniciativa destinada a fortalecer a participação comunitária no esforço de melhoria da escola pública. Desenvolvido pelo Projeto Brasil 500 Anos em conjunto com o • na estimulação das escolas para sua abertura à comunidade; • na convocação da sociedade brasileira a participar de ações de voluntariado; • na ampliação de parcerias aproximando e a comunidade da vida escolar. AEROPORTOC.E. João XXIII - Ensino Fundamental e Médio\",\r\n    \"street\": \"Av: Monteiro Lobato\",\r\n    \"number\": 695,\r\n    \"zipCode\": \"87050-280\",\r\n    \"phone\": \"(00) 00000-0000\",\r\n    \"category\": \"educação\",\r\n    \"neighborhood\": \"Zona 7\",\r\n    \"complement\": \"Próximo ao Shopping Avenida Center.\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/organization",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"organization"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all organizations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/organization",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"organization"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/organization/category/educação",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"organization",
+								"category",
+								"educação"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/organization/f1bac6fa-8e93-482b-ac0c-79a086cbc0fd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"organization",
+								"f1bac6fa-8e93-482b-ac0c-79a086cbc0fd"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "{{url}}",
+			"value": "localhost:3000"
+		}
+	]
+}

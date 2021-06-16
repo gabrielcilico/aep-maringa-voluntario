@@ -7,14 +7,14 @@ class VoluntaryController {
     let repository = getRepository(Voluntary)
     let {name, email, photo, birthdate, gender} = req.body
     let userExists = await repository.findOne({ where: { email } })
-    console.log(userExists)
+    
     if (userExists) {
       return res.status(409).send({ message: "user already exists"})
     }
 
-    const user = repository.create({ name, email, photo, birthdate, gender})
-    await repository.save(user)
-    return user
+    const voluntary = repository.create({ name, email, photo, birthdate, gender})
+    await repository.save(voluntary)
+    return res.status(200).send(voluntary)
   }
 
   async update(req: Request, res: Response) {
