@@ -1,0 +1,20 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.routes = void 0;
+const express_1 = require("express");
+const voluntary_controller_1 = __importDefault(require("./voluntary/voluntary-controller"));
+const organization_controller_1 = __importDefault(require("./organization/organization-controller"));
+const routes = express_1.Router();
+exports.routes = routes;
+routes.post('/voluntary', voluntary_controller_1.default.save);
+routes.put('/voluntary', voluntary_controller_1.default.update);
+routes.get('/voluntary', voluntary_controller_1.default.getAll);
+routes.get('/voluntary/:email', voluntary_controller_1.default.getByEmail);
+routes.post('/organization', organization_controller_1.default.save);
+routes.put('/organization', organization_controller_1.default.update);
+routes.get('/organization', organization_controller_1.default.getAll);
+routes.get('/organization/:id', organization_controller_1.default.getById);
+routes.get('/organization/category/:category', organization_controller_1.default.getByCategory);

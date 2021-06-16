@@ -7,7 +7,6 @@
     "test": "jest",
     "dev": "tsnd --transpile-only --respawn --ignore-watch node_modules src/server.ts",
     "typeorm": "npx tsnd ./node_modules/typeorm/cli.js",
-    "build": "tsc",
     "start": "node dist/server.js"
   },
   "repository": {
