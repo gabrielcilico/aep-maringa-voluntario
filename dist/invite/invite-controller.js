@@ -99,6 +99,7 @@ class OrganizationController {
         let repository = typeorm_1.getRepository(invite_model_1.Invite);
         let id = req.params.id;
         let invite = await repository.find({ where: { voluntary: id } });
+        console.log('Invite => ' + JSON.stringify(invite));
         return res.status(200).send(invite);
     }
 }
