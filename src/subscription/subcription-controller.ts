@@ -63,7 +63,7 @@ class SubscriptionController {
     }
     
     let jobRepository = getRepository(Job)
-    let job = await jobRepository.create({ organization, voluntary, status: 'in progress'})
+    let job = await jobRepository.create({ organization, voluntary, hoursRegistered: 0, status: 'in progress'})
     await jobRepository.save(job)
     subscription.status = 'accepted'
     await repository.save(subscription)

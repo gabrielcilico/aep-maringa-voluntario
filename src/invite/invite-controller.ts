@@ -64,7 +64,7 @@ class OrganizationController {
 
     invite.status = 'accepted'
     let jobRepository = getRepository(Job)
-    let job = await jobRepository.create({ organization, voluntary, status: 'in progress'})
+    let job = await jobRepository.create({ organization, voluntary, hoursRegistered: 0, status: 'in progress'})
     await jobRepository.save(job)
     await repository.save(invite)
     return res.status(200).send(invite)

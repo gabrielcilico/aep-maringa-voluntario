@@ -4,7 +4,7 @@ import { getRepository } from "typeorm";
 import { Organization } from "../organization/organization-model";
 import { Voluntary } from '../voluntary/voluntary-model';
 
-class OrganizationController {
+class JobController {
 
   async save(req: Request, res: Response) {
     let repository = getRepository(Job)
@@ -30,7 +30,7 @@ class OrganizationController {
       return res.status(404).send({ message: "voluntary not found"})
     }
     
-    const job = repository.create({organization, voluntary, status: 'in progress'})
+    const job = repository.create({organization, voluntary, hoursRegistered: 0, status: 'in progress'})
     await repository.save(job)
     return res.status(201).send(job)
   }
@@ -84,4 +84,4 @@ class OrganizationController {
   }
 }
 
-export default new OrganizationController()
+export default new JobController()
