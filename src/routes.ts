@@ -3,6 +3,7 @@ import voluntaryController from './voluntary/voluntary-controller'
 import organizationController from './organization/organization-controller'
 import inviteController from './invite/invite-controller'
 import subscriptionController from './subscription/subcription-controller'
+import jobController from './job/job-controller'
 
 const routes = Router()
 
@@ -22,10 +23,13 @@ routes.post('/invite/accept', inviteController.accept)
 routes.post('/invite/cancel', inviteController.cancel)
 routes.post('/invite/reject', inviteController.reject)
 
-routes.post('/invite', subscriptionController.invite)
+routes.post('/invite', subscriptionController.subscribe)
 routes.post('/invite/accept', subscriptionController.accept)
 routes.post('/invite/cancel', subscriptionController.cancel)
 routes.post('/invite/reject', subscriptionController.reject)
 
+routes.post('/job', jobController.save)
+routes.post('/job/update', jobController.updateHour)
+routes.post('/invite/close', jobController.close)
 
 export { routes }

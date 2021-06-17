@@ -6,7 +6,7 @@ import { Voluntary } from "../voluntary/voluntary-model";
 
 class SubscriptionController {
 
-  async subscription(req: Request, res: Response) {
+  async subscribe(req: Request, res: Response) {
     let repository = getRepository(Subscription)
     let { idVoluntary, idOrganization } = req.body
     let subscriptionExists = await repository.findOne({ where: { 
