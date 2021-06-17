@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import { Organization } from "../organization/organization-model";
 import { Voluntary } from "../voluntary/voluntary-model";
+import { Job } from '../job/job-model';
 
 class OrganizationController {
 
@@ -48,11 +49,23 @@ class OrganizationController {
     if (!invite) {
       return res.status(404).send({ message: "invite not found"})
     }
+    
+    let orgRepository = getRepository(Organization)
+    let organization = await orgRepository.findOne({ where: {id: idOrganization}})
+    if (!organization) {
+      return res.status(404).send({ message: "organization not found"})
+    }
+    
+    let volRepository = getRepository(Voluntary)
+    let voluntary = await volRepository.findOne({ where: {id: idVoluntary}})
+    if (!voluntary) {
+      return res.status(404).send({ message: "voluntary not found"})
+    }
 
     invite.status = 'accepted'
-
-    // TODO: Deve gerar um registro de trabalho com status em aberto
-
+    let jobRepository = getRepository(Job)
+    let job = await jobRepository.create({ organization, voluntary, status: 'in progress'})
+    await jobRepository.save(job)
     await repository.save(invite)
     return res.status(200).send(invite)
   }

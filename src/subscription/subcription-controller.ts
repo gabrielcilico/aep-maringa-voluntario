@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import { Organization } from "../organization/organization-model";
 import { Voluntary } from "../voluntary/voluntary-model";
+import { Job } from '../job/job-model';
 
 class SubscriptionController {
 
@@ -49,10 +50,22 @@ class SubscriptionController {
       return res.status(404).send({ message: "subscription not found"})
     }
 
+    let orgRepository = getRepository(Organization)
+    let organization = await orgRepository.findOne({ where: {id: idOrganization}})
+    if (!organization) {
+      return res.status(404).send({ message: "organization not found"})
+    }
+    
+    let volRepository = getRepository(Voluntary)
+    let voluntary = await volRepository.findOne({ where: {id: idVoluntary}})
+    if (!voluntary) {
+      return res.status(404).send({ message: "voluntary not found"})
+    }
+    
+    let jobRepository = getRepository(Job)
+    let job = await jobRepository.create({ organization, voluntary, status: 'in progress'})
+    await jobRepository.save(job)
     subscription.status = 'accepted'
-
-    // TODO: Deve gerar um registro de trabalho com status em aberto
-
     await repository.save(subscription)
     return res.status(200).send(subscription)
   }
