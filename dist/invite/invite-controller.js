@@ -10,8 +10,8 @@ class OrganizationController {
         let repository = typeorm_1.getRepository(invite_model_1.Invite);
         let { voluntaryId, organizationId } = req.body;
         let inviteExists = await repository.findOne({ where: {
-                id_organization: organizationId,
-                id_voluntary: voluntaryId,
+                organizationId,
+                voluntaryId,
                 status: 'pending'
             } });
         if (inviteExists) {
@@ -35,8 +35,8 @@ class OrganizationController {
         let repository = typeorm_1.getRepository(invite_model_1.Invite);
         let { voluntaryId, organizationId } = req.body;
         const invite = await repository.findOne({ where: {
-                id_organization: organizationId,
-                id_voluntary: voluntaryId,
+                organizationId,
+                voluntaryId,
                 status: 'pending'
             } });
         if (!invite) {
@@ -63,8 +63,8 @@ class OrganizationController {
         let repository = typeorm_1.getRepository(invite_model_1.Invite);
         let { voluntaryId, organizationId } = req.body;
         const invite = await repository.findOne({ where: {
-                id_organization: organizationId,
-                id_voluntary: voluntaryId,
+                organizationId,
+                voluntaryId,
                 status: 'pending'
             } });
         if (!invite) {
@@ -78,8 +78,8 @@ class OrganizationController {
         let repository = typeorm_1.getRepository(invite_model_1.Invite);
         let { voluntaryId, organizationId } = req.body;
         const invite = await repository.findOne({ where: {
-                id_organization: organizationId,
-                id_voluntary: voluntaryId,
+                organizationId,
+                voluntaryId,
                 status: 'pending'
             } });
         if (!invite) {

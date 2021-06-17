@@ -10,8 +10,8 @@ class SubscriptionController {
         let repository = typeorm_1.getRepository(subscription_model_1.Subscription);
         let { voluntaryId, organizationId } = req.body;
         let subscriptionExists = await repository.findOne({ where: {
-                id_organization: organizationId,
-                id_voluntary: voluntaryId,
+                organizationId,
+                voluntaryId,
                 status: 'pending'
             } });
         if (subscriptionExists) {
@@ -35,8 +35,8 @@ class SubscriptionController {
         let repository = typeorm_1.getRepository(subscription_model_1.Subscription);
         let { voluntaryId, organizationId } = req.body;
         const subscription = await repository.findOne({ where: {
-                id_organization: organizationId,
-                id_voluntary: voluntaryId,
+                organizationId: organizationId,
+                voluntaryId: voluntaryId,
                 status: 'pending'
             } });
         if (!subscription) {
@@ -63,8 +63,8 @@ class SubscriptionController {
         let repository = typeorm_1.getRepository(subscription_model_1.Subscription);
         let { voluntaryId, organizationId } = req.body;
         const subscription = await repository.findOne({ where: {
-                id_organization: organizationId,
-                id_voluntary: voluntaryId,
+                organizationId: organizationId,
+                voluntaryId: voluntaryId,
                 status: 'pending'
             } });
         if (!subscription) {
@@ -78,8 +78,8 @@ class SubscriptionController {
         let repository = typeorm_1.getRepository(subscription_model_1.Subscription);
         let { voluntaryId, organizationId } = req.body;
         const subscription = await repository.findOne({ where: {
-                id_organization: organizationId,
-                id_voluntary: voluntaryId,
+                organizationId: organizationId,
+                voluntaryId: voluntaryId,
                 status: 'pending'
             } });
         if (!subscription) {
