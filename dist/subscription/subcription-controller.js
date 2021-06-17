@@ -53,7 +53,7 @@ class SubscriptionController {
             return res.status(404).send({ message: "voluntary not found" });
         }
         let jobRepository = typeorm_1.getRepository(job_model_1.Job);
-        let job = await jobRepository.create({ organization, voluntary, status: 'in progress' });
+        let job = await jobRepository.create({ organization, voluntary, hoursRegistered: 0, status: 'in progress' });
         await jobRepository.save(job);
         subscription.status = 'accepted';
         await repository.save(subscription);

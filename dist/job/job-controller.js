@@ -4,7 +4,7 @@ const job_model_1 = require("./job-model");
 const typeorm_1 = require("typeorm");
 const organization_model_1 = require("../organization/organization-model");
 const voluntary_model_1 = require("../voluntary/voluntary-model");
-class OrganizationController {
+class JobController {
     async save(req, res) {
         let repository = typeorm_1.getRepository(job_model_1.Job);
         let { organizationId, voluntaryId } = req.body;
@@ -25,7 +25,7 @@ class OrganizationController {
         if (!voluntary) {
             return res.status(404).send({ message: "voluntary not found" });
         }
-        const job = repository.create({ organization, voluntary, status: 'in progress' });
+        const job = repository.create({ organization, voluntary, hoursRegistered: 0, status: 'in progress' });
         await repository.save(job);
         return res.status(201).send(job);
     }
@@ -71,4 +71,4 @@ class OrganizationController {
         return res.status(200).send(job);
     }
 }
-exports.default = new OrganizationController();
+exports.default = new JobController();
