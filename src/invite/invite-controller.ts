@@ -109,14 +109,14 @@ class OrganizationController {
   async getByOrganization(req: Request, res: Response) {
     let repository = getRepository(Invite)
     let id = req.params.id
-    let invite = await repository.findOne({ where: { organization: id } })
+    let invite = await repository.find({ where: { organization: id } })
     return res.status(200).send(invite)
   }
 
   async getByVoluntary(req: Request, res: Response) {
     let repository = getRepository(Invite)
     let id = req.params.id
-    let invite = await repository.findOne({ where: { voluntary: id } })
+    let invite = await repository.find({ where: { voluntary: id } })
     return res.status(200).send(invite)
   }
 }
