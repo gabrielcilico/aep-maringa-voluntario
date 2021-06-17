@@ -7,18 +7,18 @@ const voluntary_model_1 = require("../voluntary/voluntary-model");
 class OrganizationController {
     async save(req, res) {
         let repository = typeorm_1.getRepository(job_model_1.Job);
-        let { idOrganization, idVoluntary } = req.body;
-        let jobExists = await repository.findOne({ where: [{ idOrganization, idVoluntary }, { status: 'in progress' }] });
+        let { organizationId, voluntaryId } = req.body;
+        let jobExists = await repository.findOne({ where: [{ organizationId, voluntaryId }, { status: 'in progress' }] });
         if (jobExists) {
             return res.status(409).send({ message: "job already exists" });
         }
         let orgRepository = typeorm_1.getRepository(organization_model_1.Organization);
-        let organization = await orgRepository.findOne({ where: { id: idOrganization } });
+        let organization = await orgRepository.findOne({ where: { id: organizationId } });
         if (!organization) {
             return res.status(404).send({ message: "organization not found" });
         }
         let volRepository = typeorm_1.getRepository(voluntary_model_1.Voluntary);
-        let voluntary = await volRepository.findOne({ where: { id: idVoluntary } });
+        let voluntary = await volRepository.findOne({ where: { id: voluntaryId } });
         if (!voluntary) {
             return res.status(404).send({ message: "voluntary not found" });
         }
@@ -28,8 +28,8 @@ class OrganizationController {
     }
     async updateHour(req, res) {
         let repository = typeorm_1.getRepository(job_model_1.Job);
-        let { idOrganization, idVoluntary, hoursRegistered } = req.body;
-        const job = await repository.findOne({ where: [{ idOrganization, idVoluntary }, { status: 'in progress' }] });
+        let { organizationId, voluntaryId, hoursRegistered } = req.body;
+        const job = await repository.findOne({ where: [{ organizationId, voluntaryId }, { status: 'in progress' }] });
         if (!job) {
             return res.status(404).send({ message: "job not found" });
         }
@@ -39,8 +39,8 @@ class OrganizationController {
     }
     async close(req, res) {
         let repository = typeorm_1.getRepository(job_model_1.Job);
-        let { idOrganization, idVoluntary } = req.body;
-        const job = await repository.findOne({ where: [{ idOrganization, idVoluntary, status: 'in progress' }] });
+        let { organizationId, voluntaryId } = req.body;
+        const job = await repository.findOne({ where: [{ organizationId, voluntaryId, status: 'in progress' }] });
         if (!job) {
             return res.status(404).send({ message: "job not found" });
         }
@@ -51,13 +51,13 @@ class OrganizationController {
     async getByOrganization(req, res) {
         let repository = typeorm_1.getRepository(job_model_1.Job);
         let id = req.params.id;
-        let job = await repository.findOne({ where: { idOrganization: id } });
+        let job = await repository.findOne({ where: { organizationId: id } });
         return res.status(200).send(job);
     }
     async getByVoluntary(req, res) {
         let repository = typeorm_1.getRepository(job_model_1.Job);
         let id = req.params.email;
-        let job = await repository.findOne({ where: { idVoluntary: id } });
+        let job = await repository.findOne({ where: { voluntaryId: id } });
         return res.status(200).send(job);
     }
 }

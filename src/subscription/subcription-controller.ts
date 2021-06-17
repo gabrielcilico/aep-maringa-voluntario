@@ -9,10 +9,10 @@ class SubscriptionController {
 
   async subscribe(req: Request, res: Response) {
     let repository = getRepository(Subscription)
-    let { idVoluntary, idOrganization } = req.body
+    let { voluntaryId, organizationId } = req.body
     let subscriptionExists = await repository.findOne({ where: { 
-      id_organization: idOrganization, 
-      id_voluntary: idVoluntary,
+      id_organization: organizationId, 
+      id_voluntary: voluntaryId,
       status: 'pending'
     }})
 
@@ -21,13 +21,13 @@ class SubscriptionController {
     }
     
     let orgRepository = getRepository(Organization)
-    let organization = await orgRepository.findOne({ where: {id: idOrganization}})
+    let organization = await orgRepository.findOne({ where: {id: organizationId}})
     if (!organization) {
       return res.status(404).send({ message: "organization not found"})
     }
     
     let volRepository = getRepository(Voluntary)
-    let voluntary = await volRepository.findOne({ where: {id: idVoluntary}})
+    let voluntary = await volRepository.findOne({ where: {id: voluntaryId}})
     if (!voluntary) {
       return res.status(404).send({ message: "voluntary not found"})
     }
@@ -39,10 +39,10 @@ class SubscriptionController {
 
   async accept(req: Request, res: Response) {
     let repository = getRepository(Subscription)
-    let { idVoluntary, idOrganization } = req.body
+    let { voluntaryId, organizationId } = req.body
     const subscription = await repository.findOne({ where: { 
-      id_organization: idOrganization, 
-      id_voluntary: idVoluntary,
+      id_organization: organizationId, 
+      id_voluntary: voluntaryId,
       status: 'pending'
     }})
 
@@ -51,13 +51,13 @@ class SubscriptionController {
     }
 
     let orgRepository = getRepository(Organization)
-    let organization = await orgRepository.findOne({ where: {id: idOrganization}})
+    let organization = await orgRepository.findOne({ where: {id: organizationId}})
     if (!organization) {
       return res.status(404).send({ message: "organization not found"})
     }
     
     let volRepository = getRepository(Voluntary)
-    let voluntary = await volRepository.findOne({ where: {id: idVoluntary}})
+    let voluntary = await volRepository.findOne({ where: {id: voluntaryId}})
     if (!voluntary) {
       return res.status(404).send({ message: "voluntary not found"})
     }
@@ -72,10 +72,10 @@ class SubscriptionController {
 
   async reject(req: Request, res: Response) {
     let repository = getRepository(Subscription)
-    let { idVoluntary, idOrganization } = req.body
+    let { voluntaryId, organizationId } = req.body
     const subscription = await repository.findOne({ where: { 
-      id_organization: idOrganization, 
-      id_voluntary: idVoluntary,
+      id_organization: organizationId, 
+      id_voluntary: voluntaryId,
       status: 'pending'
     }})
 
@@ -90,10 +90,10 @@ class SubscriptionController {
 
   async cancel(req: Request, res: Response) {
     let repository = getRepository(Subscription)
-    let { idVoluntary, idOrganization } = req.body
+    let { voluntaryId, organizationId } = req.body
     const subscription = await repository.findOne({ where: { 
-      id_organization: idOrganization, 
-      id_voluntary: idVoluntary,
+      id_organization: organizationId, 
+      id_voluntary: voluntaryId,
       status: 'pending'
     }})
 
@@ -109,14 +109,14 @@ class SubscriptionController {
   async getByOrganization(req: Request, res: Response) {
     let repository = getRepository(Subscription)
     let id = req.params.id
-    let subscription = await repository.findOne({ where: { idOrganization: id } })
+    let subscription = await repository.findOne({ where: { organizationId: id } })
     return res.status(200).send(subscription)
   }
 
   async getByVoluntary(req: Request, res: Response) {
     let repository = getRepository(Subscription)
     let id = req.params.email
-    let subscription = await repository.findOne({ where: { idVoluntary: id } })
+    let subscription = await repository.findOne({ where: { voluntaryId: id } })
     return res.status(200).send(subscription)
   }
 }

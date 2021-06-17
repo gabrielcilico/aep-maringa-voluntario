@@ -8,22 +8,22 @@ const job_model_1 = require("../job/job-model");
 class SubscriptionController {
     async subscribe(req, res) {
         let repository = typeorm_1.getRepository(subscription_model_1.Subscription);
-        let { idVoluntary, idOrganization } = req.body;
+        let { voluntaryId, organizationId } = req.body;
         let subscriptionExists = await repository.findOne({ where: {
-                id_organization: idOrganization,
-                id_voluntary: idVoluntary,
+                id_organization: organizationId,
+                id_voluntary: voluntaryId,
                 status: 'pending'
             } });
         if (subscriptionExists) {
             return res.status(409).send({ message: "this subscription already exists and is pending" });
         }
         let orgRepository = typeorm_1.getRepository(organization_model_1.Organization);
-        let organization = await orgRepository.findOne({ where: { id: idOrganization } });
+        let organization = await orgRepository.findOne({ where: { id: organizationId } });
         if (!organization) {
             return res.status(404).send({ message: "organization not found" });
         }
         let volRepository = typeorm_1.getRepository(voluntary_model_1.Voluntary);
-        let voluntary = await volRepository.findOne({ where: { id: idVoluntary } });
+        let voluntary = await volRepository.findOne({ where: { id: voluntaryId } });
         if (!voluntary) {
             return res.status(404).send({ message: "voluntary not found" });
         }
@@ -33,22 +33,22 @@ class SubscriptionController {
     }
     async accept(req, res) {
         let repository = typeorm_1.getRepository(subscription_model_1.Subscription);
-        let { idVoluntary, idOrganization } = req.body;
+        let { voluntaryId, organizationId } = req.body;
         const subscription = await repository.findOne({ where: {
-                id_organization: idOrganization,
-                id_voluntary: idVoluntary,
+                id_organization: organizationId,
+                id_voluntary: voluntaryId,
                 status: 'pending'
             } });
         if (!subscription) {
             return res.status(404).send({ message: "subscription not found" });
         }
         let orgRepository = typeorm_1.getRepository(organization_model_1.Organization);
-        let organization = await orgRepository.findOne({ where: { id: idOrganization } });
+        let organization = await orgRepository.findOne({ where: { id: organizationId } });
         if (!organization) {
             return res.status(404).send({ message: "organization not found" });
         }
         let volRepository = typeorm_1.getRepository(voluntary_model_1.Voluntary);
-        let voluntary = await volRepository.findOne({ where: { id: idVoluntary } });
+        let voluntary = await volRepository.findOne({ where: { id: voluntaryId } });
         if (!voluntary) {
             return res.status(404).send({ message: "voluntary not found" });
         }
@@ -61,10 +61,10 @@ class SubscriptionController {
     }
     async reject(req, res) {
         let repository = typeorm_1.getRepository(subscription_model_1.Subscription);
-        let { idVoluntary, idOrganization } = req.body;
+        let { voluntaryId, organizationId } = req.body;
         const subscription = await repository.findOne({ where: {
-                id_organization: idOrganization,
-                id_voluntary: idVoluntary,
+                id_organization: organizationId,
+                id_voluntary: voluntaryId,
                 status: 'pending'
             } });
         if (!subscription) {
@@ -76,10 +76,10 @@ class SubscriptionController {
     }
     async cancel(req, res) {
         let repository = typeorm_1.getRepository(subscription_model_1.Subscription);
-        let { idVoluntary, idOrganization } = req.body;
+        let { voluntaryId, organizationId } = req.body;
         const subscription = await repository.findOne({ where: {
-                id_organization: idOrganization,
-                id_voluntary: idVoluntary,
+                id_organization: organizationId,
+                id_voluntary: voluntaryId,
                 status: 'pending'
             } });
         if (!subscription) {
@@ -92,13 +92,13 @@ class SubscriptionController {
     async getByOrganization(req, res) {
         let repository = typeorm_1.getRepository(subscription_model_1.Subscription);
         let id = req.params.id;
-        let subscription = await repository.findOne({ where: { idOrganization: id } });
+        let subscription = await repository.findOne({ where: { organizationId: id } });
         return res.status(200).send(subscription);
     }
     async getByVoluntary(req, res) {
         let repository = typeorm_1.getRepository(subscription_model_1.Subscription);
         let id = req.params.email;
-        let subscription = await repository.findOne({ where: { idVoluntary: id } });
+        let subscription = await repository.findOne({ where: { voluntaryId: id } });
         return res.status(200).send(subscription);
     }
 }
