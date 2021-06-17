@@ -20,11 +20,15 @@ __decorate([
     __metadata("design:type", String)
 ], Job.prototype, "id", void 0);
 __decorate([
-    typeorm_1.ManyToOne(type => organization_model_1.Organization),
+    typeorm_1.ManyToOne(type => organization_model_1.Organization, {
+        eager: true
+    }),
     __metadata("design:type", organization_model_1.Organization)
 ], Job.prototype, "organization", void 0);
 __decorate([
-    typeorm_1.ManyToOne(type => voluntary_model_1.Voluntary),
+    typeorm_1.ManyToOne(type => voluntary_model_1.Voluntary, {
+        eager: true
+    }),
     __metadata("design:type", voluntary_model_1.Voluntary)
 ], Job.prototype, "voluntary", void 0);
 __decorate([

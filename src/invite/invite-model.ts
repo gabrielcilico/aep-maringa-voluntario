@@ -8,10 +8,14 @@ export class Invite {
   @PrimaryGeneratedColumn('uuid')
   public id: string
 
-  @ManyToOne(type => Organization)
+  @ManyToOne(type => Organization, {
+    eager: true
+  })
   public organization: Organization
 
-  @ManyToOne(type => Voluntary)
+  @ManyToOne(type => Voluntary, {
+    eager: true
+  })
   public voluntary: Voluntary
 
   @CreateDateColumn()

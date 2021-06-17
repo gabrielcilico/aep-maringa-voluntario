@@ -117,7 +117,6 @@ class OrganizationController {
     let repository = getRepository(Invite)
     let id = req.params.id
     let invite = await repository.find({ where: { voluntary: id } })
-    console.log('Invite => ' + JSON.stringify(invite))
     return res.status(200).send(invite)
   }
 }
