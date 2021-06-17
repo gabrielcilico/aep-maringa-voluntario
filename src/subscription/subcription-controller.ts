@@ -92,6 +92,20 @@ class SubscriptionController {
     await repository.save(subscription)
     return res.status(200).send(subscription)
   }
+
+  async getByOrganization(req: Request, res: Response) {
+    let repository = getRepository(Subscription)
+    let id = req.params.id
+    let subscription = await repository.findOne({ where: { idOrganization: id } })
+    return res.status(200).send(subscription)
+  }
+
+  async getByVoluntary(req: Request, res: Response) {
+    let repository = getRepository(Subscription)
+    let id = req.params.email
+    let subscription = await repository.findOne({ where: { idVoluntary: id } })
+    return res.status(200).send(subscription)
+  }
 }
 
 export default new SubscriptionController()

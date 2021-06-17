@@ -59,6 +59,20 @@ class OrganizationController {
     await repository.save(job)
     return res.send(200).send(job)
   }
+
+  async getByOrganization(req: Request, res: Response) {
+    let repository = getRepository(Job)
+    let id = req.params.id
+    let job = await repository.findOne({ where: { idOrganization: id } })
+    return res.status(200).send(job)
+  }
+
+  async getByVoluntary(req: Request, res: Response) {
+    let repository = getRepository(Job)
+    let id = req.params.email
+    let job = await repository.findOne({ where: { idVoluntary: id } })
+    return res.status(200).send(job)
+  }
 }
 
 export default new OrganizationController()

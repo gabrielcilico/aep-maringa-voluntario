@@ -92,6 +92,20 @@ class OrganizationController {
     await repository.save(invite)
     return res.status(200).send(invite)
   }
+
+  async getByOrganization(req: Request, res: Response) {
+    let repository = getRepository(Invite)
+    let id = req.params.id
+    let invite = await repository.findOne({ where: { idOrganization: id } })
+    return res.status(200).send(invite)
+  }
+
+  async getByVoluntary(req: Request, res: Response) {
+    let repository = getRepository(Invite)
+    let id = req.params.email
+    let invite = await repository.findOne({ where: { idVoluntary: id } })
+    return res.status(200).send(invite)
+  }
 }
 
 export default new OrganizationController()
