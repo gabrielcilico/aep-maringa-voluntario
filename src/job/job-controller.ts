@@ -72,14 +72,14 @@ class OrganizationController {
   async getByOrganization(req: Request, res: Response) {
     let repository = getRepository(Job)
     let id = req.params.id
-    let job = await repository.findOne({ where: { organizationId: id } })
+    let job = await repository.findOne({ where: { organization: id } })
     return res.status(200).send(job)
   }
 
   async getByVoluntary(req: Request, res: Response) {
     let repository = getRepository(Job)
-    let id = req.params.email
-    let job = await repository.findOne({ where: { voluntaryId: id } })
+    let id = req.params.id
+    let job = await repository.findOne({ where: { voluntary: id } })
     return res.status(200).send(job)
   }
 }

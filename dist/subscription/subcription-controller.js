@@ -92,13 +92,13 @@ class SubscriptionController {
     async getByOrganization(req, res) {
         let repository = typeorm_1.getRepository(subscription_model_1.Subscription);
         let id = req.params.id;
-        let subscription = await repository.findOne({ where: { organizationId: id } });
+        let subscription = await repository.findOne({ where: { organization: id } });
         return res.status(200).send(subscription);
     }
     async getByVoluntary(req, res) {
         let repository = typeorm_1.getRepository(subscription_model_1.Subscription);
-        let id = req.params.email;
-        let subscription = await repository.findOne({ where: { voluntaryId: id } });
+        let id = req.params.id;
+        let subscription = await repository.findOne({ where: { voluntary: id } });
         return res.status(200).send(subscription);
     }
 }

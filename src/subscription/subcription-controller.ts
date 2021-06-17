@@ -109,14 +109,14 @@ class SubscriptionController {
   async getByOrganization(req: Request, res: Response) {
     let repository = getRepository(Subscription)
     let id = req.params.id
-    let subscription = await repository.findOne({ where: { organizationId: id } })
+    let subscription = await repository.findOne({ where: { organization: id } })
     return res.status(200).send(subscription)
   }
 
   async getByVoluntary(req: Request, res: Response) {
     let repository = getRepository(Subscription)
-    let id = req.params.email
-    let subscription = await repository.findOne({ where: { voluntaryId: id } })
+    let id = req.params.id
+    let subscription = await repository.findOne({ where: { voluntary: id } })
     return res.status(200).send(subscription)
   }
 }

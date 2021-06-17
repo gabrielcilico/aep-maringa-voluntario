@@ -61,13 +61,13 @@ class OrganizationController {
     async getByOrganization(req, res) {
         let repository = typeorm_1.getRepository(job_model_1.Job);
         let id = req.params.id;
-        let job = await repository.findOne({ where: { organizationId: id } });
+        let job = await repository.findOne({ where: { organization: id } });
         return res.status(200).send(job);
     }
     async getByVoluntary(req, res) {
         let repository = typeorm_1.getRepository(job_model_1.Job);
-        let id = req.params.email;
-        let job = await repository.findOne({ where: { voluntaryId: id } });
+        let id = req.params.id;
+        let job = await repository.findOne({ where: { voluntary: id } });
         return res.status(200).send(job);
     }
 }
