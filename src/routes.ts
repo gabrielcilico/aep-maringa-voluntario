@@ -23,19 +23,19 @@ routes.post('/invite/accept', inviteController.accept)
 routes.post('/invite/cancel', inviteController.cancel)
 routes.post('/invite/reject', inviteController.reject)
 routes.get('/invite/byOrganization/:id', inviteController.getByOrganization)
-routes.get('/invite/byVoluntary/:email', inviteController.getByVoluntary)
+routes.get('/invite/byVoluntary/:id', inviteController.getByVoluntary)
 
 routes.post('/subscription', subscriptionController.subscribe)
 routes.post('/subscription/accept', subscriptionController.accept)
 routes.post('/subscription/cancel', subscriptionController.cancel)
 routes.post('/subscription/reject', subscriptionController.reject)
 routes.get('/subscription/byOrganization/:id', subscriptionController.getByOrganization)
-routes.get('/subscription/byVoluntary/:email', subscriptionController.getByVoluntary)
+routes.get('/subscription/byVoluntary/:id', subscriptionController.getByVoluntary)
 
 routes.post('/job', jobController.save)
 routes.post('/job/update', jobController.updateHour)
 routes.post('/job/close', jobController.close)
 routes.get('/job/byOrganization/:id', jobController.getByOrganization)
-routes.get('/job/byVoluntary/:email', jobController.getByVoluntary)
+routes.get('/job/byVoluntary/:id', jobController.getByVoluntary)
 
 export { routes }
