@@ -11,8 +11,8 @@ class SubscriptionController {
     let repository = getRepository(Subscription)
     let { voluntaryId, organizationId } = req.body
     let subscriptionExists = await repository.findOne({ where: { 
-      organizationId, 
-      voluntaryId,
+      organization: organizationId, 
+      voluntary: voluntaryId,
       status: 'pending'
     }})
 
@@ -41,8 +41,8 @@ class SubscriptionController {
     let repository = getRepository(Subscription)
     let { voluntaryId, organizationId } = req.body
     const subscription = await repository.findOne({ where: { 
-      organizationId, 
-      voluntaryId,
+      organization: organizationId, 
+      voluntary: voluntaryId,
       status: 'pending'
     }})
 
@@ -74,8 +74,8 @@ class SubscriptionController {
     let repository = getRepository(Subscription)
     let { voluntaryId, organizationId } = req.body
     const subscription = await repository.findOne({ where: { 
-      organizationId, 
-      voluntaryId,
+      organization: organizationId, 
+      voluntary: voluntaryId,
       status: 'pending'
     }})
 
@@ -92,8 +92,8 @@ class SubscriptionController {
     let repository = getRepository(Subscription)
     let { voluntaryId, organizationId } = req.body
     const subscription = await repository.findOne({ where: { 
-      organizationId, 
-      voluntaryId,
+      organization: organizationId, 
+      voluntary: voluntaryId,
       status: 'pending'
     }})
 

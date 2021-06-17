@@ -11,8 +11,8 @@ class OrganizationController {
     let repository = getRepository(Invite)
     let { voluntaryId, organizationId } = req.body
     let inviteExists = await repository.findOne({ where: { 
-      organizationId, 
-      voluntaryId,
+      organization: organizationId, 
+      voluntary: voluntaryId,
       status: 'pending'
     }})
 
@@ -41,8 +41,8 @@ class OrganizationController {
     let repository = getRepository(Invite)
     let { voluntaryId, organizationId } = req.body
     const invite = await repository.findOne({ where: { 
-      organizationId, 
-      voluntaryId,
+      organization: organizationId, 
+      voluntary: voluntaryId,
       status: 'pending'
     }})
 
@@ -74,8 +74,8 @@ class OrganizationController {
     let repository = getRepository(Invite)
     let { voluntaryId, organizationId } = req.body
     const invite = await repository.findOne({ where: { 
-      organizationId, 
-      voluntaryId,
+      organization: organizationId, 
+      voluntary: voluntaryId,
       status: 'pending'
     }})
 
@@ -92,8 +92,8 @@ class OrganizationController {
     let repository = getRepository(Invite)
     let { voluntaryId, organizationId } = req.body
     const invite = await repository.findOne({ where: { 
-      organizationId, 
-      voluntaryId,
+      organization: organizationId, 
+      voluntary: voluntaryId,
       status: 'pending'
     }})
 
