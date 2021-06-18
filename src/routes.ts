@@ -4,8 +4,11 @@ import organizationController from './organization/organization-controller'
 import inviteController from './invite/invite-controller'
 import subscriptionController from './subscription/subcription-controller'
 import jobController from './job/job-controller'
+import homeController from './home/home-controller'
 
 const routes = Router()
+
+routes.get('/', homeController.getInfo)
 
 routes.post('/voluntary', voluntaryController.save)
 routes.put('/voluntary', voluntaryController.update)
@@ -35,7 +38,7 @@ routes.get('/subscription/byOrganization/:id', subscriptionController.getByOrgan
 routes.get('/subscription/byVoluntary/:id', subscriptionController.getByVoluntary)
 
 routes.post('/job', jobController.save)
-routes.post('/job/update', jobController.updateHour)
+routes.put('/job/update', jobController.updateHour)
 routes.post('/job/close', jobController.close)
 routes.get('/job/byOrganization/:id', jobController.getByOrganization)
 routes.get('/job/byVoluntary/:id', jobController.getByVoluntary)
