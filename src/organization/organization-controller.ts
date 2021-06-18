@@ -96,6 +96,17 @@ class OrganizationController {
     let organizations = await repository.find({ where: { category } })
     return res.status(200).send(organizations)
   }
+
+  async getByEmail(req: Request, res: Response) {
+    let repository = getRepository(Organization)
+    let email = req.params.email
+    let organization = await repository.findOne({ where: { email } })
+
+    if (!organization) {
+      return res.status(404).send({ message: 'organization not found' })
+    }
+    return res.status(200).send(organization)
+  }
 }
 
 export default new OrganizationController()

@@ -11,11 +11,13 @@ routes.post('/voluntary', voluntaryController.save)
 routes.put('/voluntary', voluntaryController.update)
 routes.get('/voluntary', voluntaryController.getAll)
 routes.get('/voluntary/:email', voluntaryController.getByEmail)
+routes.get('/voluntary/get/notInviteds', voluntaryController.getNotInviteds)
 
 routes.post('/organization', organizationController.save)
 routes.put('/organization', organizationController.update)
 routes.get('/organization', organizationController.getAll)
 routes.get('/organization/:id', organizationController.getById)
+routes.get('/organization/getByEmail/:email', organizationController.getByEmail)
 routes.get('/organization/category/:category', organizationController.getByCategory)
 
 routes.post('/invite', inviteController.invite)

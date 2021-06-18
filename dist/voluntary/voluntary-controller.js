@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const voluntary_model_1 = require("./voluntary-model");
 const typeorm_1 = require("typeorm");
+const subscription_model_1 = require("../subscription/subscription-model");
 class VoluntaryController {
     async save(req, res) {
         let repository = typeorm_1.getRepository(voluntary_model_1.Voluntary);
@@ -52,6 +53,21 @@ class VoluntaryController {
             return res.status(404).send({ error: "voluntary not found" });
         }
         return res.status(200).send(voluntary);
+    }
+    async getNotInviteds(req, res) {
+        let voluntariesIds = await typeorm_1.getRepository(subscription_model_1.Subscription)
+            .createQueryBuilder('subscription')
+            .select(['subscription.organizationId'])
+            .where('subscription.status = :status', { status: 'pending' })
+            .getMany();
+        console.log(voluntariesIds);
+        let repository = typeorm_1.getRepository(voluntary_model_1.Voluntary);
+        const voluntaries = await repository.createQueryBuilder('voluntary')
+            .where(`voluntary.id NOT IN (${voluntariesIds})`);
+        if (!voluntaries) {
+            return res.status(404).send({ error: "all voluntaries are inviteds" });
+        }
+        return res.status(200).send(voluntaries);
     }
 }
 exports.default = new VoluntaryController();
