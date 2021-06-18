@@ -54,6 +54,15 @@ class VoluntaryController {
         }
         return res.status(200).send(voluntary);
     }
+    async getById(req, res) {
+        let repository = typeorm_1.getRepository(voluntary_model_1.Voluntary);
+        let id = req.params.id;
+        const voluntary = await repository.findOne({ where: { email: id } });
+        if (!voluntary) {
+            return res.status(404).send({ error: "voluntary not found" });
+        }
+        return res.status(200).send(voluntary);
+    }
     async getNotInviteds(req, res) {
         let voluntariesIds = await typeorm_1.getRepository(subscription_model_1.Subscription)
             .createQueryBuilder('subscription')

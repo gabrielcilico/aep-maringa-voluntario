@@ -67,6 +67,16 @@ class VoluntaryController {
     return res.status(200).send(voluntary)
   }
 
+  async getById(req: Request, res: Response) {
+    let repository = getRepository(Voluntary)
+    let id = req.params.id
+    const voluntary = await repository.findOne({ where: { email: id } })
+    if (!voluntary) {
+      return res.status(404).send({ error: "voluntary not found" })
+    }
+    return res.status(200).send(voluntary)
+  }
+
   async getNotInviteds(req: Request, res: Response) {
 
     let voluntariesIds = await getRepository(Subscription)
