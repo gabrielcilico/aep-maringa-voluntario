@@ -17,6 +17,7 @@ routes.put('/voluntary', voluntary_controller_1.default.update);
 routes.get('/voluntary', voluntary_controller_1.default.getAll);
 routes.get('/voluntary/:email', voluntary_controller_1.default.getByEmail);
 routes.get('/voluntary/get/notInviteds', voluntary_controller_1.default.getNotInviteds);
+routes.get('/voluntary/getbyId/:id', voluntary_controller_1.default.getById);
 routes.post('/organization', organization_controller_1.default.save);
 routes.put('/organization', organization_controller_1.default.update);
 routes.get('/organization', organization_controller_1.default.getAll);
