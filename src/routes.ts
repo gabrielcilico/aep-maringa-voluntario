@@ -12,6 +12,7 @@ routes.put('/voluntary', voluntaryController.update)
 routes.get('/voluntary', voluntaryController.getAll)
 routes.get('/voluntary/:email', voluntaryController.getByEmail)
 routes.get('/voluntary/get/notInviteds', voluntaryController.getNotInviteds)
+routes.get('/voluntary/getbyId/:id', voluntaryController.getById)
 
 routes.post('/organization', organizationController.save)
 routes.put('/organization', organizationController.update)
