@@ -1,0 +1,936 @@
+{
+  "swagger": "2.0",
+  "info": {
+      "version": "1.0.0",
+      "title": "maringa-voluntario",
+      "description": "Aplicação voltada as entidades filantrópicas maringaenses, cujo objetivo é conectá-las a voluntários dispostos a prestar serviços em prol da comunidade.",
+      "license": {
+          "name": "MIT",
+          "url": "https://opensource.org/licenses/MIT"
+      }
+  },
+  "host": "maringavoluntario.herokuapp.com",
+  "basePath": "",
+  "tags": [
+    {
+      "name": "Voluntary",
+      "description": "API for voluntaries in the system"
+    },
+    {
+      "name": "Organization",
+      "description": "API for organization (entities) in the system"
+    },
+    {
+      "name": "Invite",
+      "description": "API for organization (entities) invite voluntaries for job"
+    },
+    {
+      "name": "Subscribe",
+      "description": "API for voluntaries subscribe on Job of organization"
+    },
+    {
+      "name": "Job",
+      "description": "API for organization (entities) control the jobs"
+    }
+  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces":["application/json"],
+  "paths": {
+    "/voluntary": {
+      "post": {
+        "tags": ["Voluntary"],
+        "summary": "Create new voluntary in system",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Need this informations to create a new voluntary",
+            "schema": {
+              "$ref": "#/definitions/Voluntary"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Voluntary"
+            }
+          },
+          "409":{
+            "description": "voluntary already exists"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Voluntary"],
+        "summary": "Edit a voluntary in system",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Need this informations to edit a voluntary",
+            "schema": {
+              "$ref": "#/definitions/Voluntary"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Voluntary"
+            }
+          },
+          "404": {
+            "description": "voluntary not found"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Voluntary"],
+        "summary": "Get all the voluntaries registered",
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Voluntary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/voluntary/{email}": {
+      "get": {
+        "tags": ["Voluntary"],
+        "summary": "Get a voluntary by email",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "email",
+            "description": "Use email to get the voluntary",
+            "schema": {
+              "$ref": "#/definitions/Voluntary"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Voluntary"
+            }
+          },
+          "404":{
+            "description": "voluntary not found"
+          }
+        }
+      }
+    },
+    "/voluntary/getById/{id}": {
+      "get": {
+        "tags": ["Voluntary"],
+        "summary": "Get a voluntary by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Use id to get the voluntary",
+            "schema": {
+              "$ref": "#/definitions/Voluntary"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Voluntary"
+            }
+          },
+          "404":{
+            "description": "voluntary not found"
+          }
+        }
+      }
+    },
+    "/organization": {
+      "post": {
+        "tags": ["Organization"],
+        "summary": "Create new organization in system",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Need this informations to create a new organization",
+            "schema": {
+              "$ref": "#/definitions/Organization"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Organization"
+            }
+          },
+          "409":{
+            "description": "organization already exists"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Organization"],
+        "summary": "Edit a organization in system",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Need this informations to edit a organization",
+            "schema": {
+              "$ref": "#/definitions/Organization"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Organization"
+            }
+          },
+          "404": {
+            "description": "organization not found"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Organization"],
+        "summary": "Get all the organizations registered",
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Organization"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/organization/{id}": {
+      "get": {
+        "tags": ["Organization"],
+        "summary": "Get a organization by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Use id to get the organization",
+            "schema": {
+              "$ref": "#/definitions/Organization"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Organization"
+            }
+          },
+          "404":{
+            "description": "organization not found"
+          }
+        }
+      }
+    },
+    "/organization/getByEmail/{email}": {
+      "get": {
+        "tags": ["Organization"],
+        "summary": "Get a organization by email",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "email",
+            "description": "Use email to get the organization",
+            "schema": {
+              "$ref": "#/definitions/Organization"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Organization"
+            }
+          },
+          "404":{
+            "description": "organization not found"
+          }
+        }
+      }
+    },
+    "/organization/category/{category}": {
+      "get": {
+        "tags": ["Organization"],
+        "summary": "Get organizations by category",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "category",
+            "description": "Use category to get organizations",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Organization"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Organization"
+            }
+          }
+        }
+      }
+    },
+    "/invite": {
+      "post": {
+        "tags": ["Invite"],
+        "summary": "Create new invite",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Use to create a invitation",
+            "schema": {
+              "$ref": "#/definitions/Invite"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Invite"
+            }
+          },
+          "409": {
+            "description": "this invite already exists and is pending"
+          },
+          "404": {
+            "description": "organization or voluntary not found"
+          }
+        }
+      }
+    },
+    "/invite/accept": {
+      "post": {
+        "tags": ["Invite"],
+        "summary": "Accept an pending invite",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Use for voluntary to accept an pending invitation",
+            "schema": {
+              "$ref": "#/definitions/Invite"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Invite"
+            }
+          },
+          "404": {
+            "description": "invite/organization/voluntary not found"
+          }
+        }
+      }
+    },
+    "/invite/cancel": {
+      "post": {
+        "tags": ["Invite"],
+        "summary": "Cancel an pending invitation",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Use for organization to cancel an pending invitation",
+            "schema": {
+              "$ref": "#/definitions/Invite"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Invite"
+            }
+          },
+          "404": {
+            "description": "invite/organization/voluntary not found"
+          }
+        }
+      }
+    },
+    "/invite/reject": {
+      "post": {
+        "tags": ["Invite"],
+        "summary": "Reject an pending invitation",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Use for voluntary to reject an pending invitation",
+            "schema": {
+              "$ref": "#/definitions/Invite"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Invite"
+            }
+          },
+          "404": {
+            "description": "invite/organization/voluntary not found"
+          }
+        }
+      }
+    },
+    "/invite/byOrganization/{id}": {
+      "post": {
+        "tags": ["Invite"],
+        "summary": "Get invites by organization id",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Use for get invites by organization id",
+            "schema": {
+              "$ref": "#/definitions/Invite"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Invite"
+              }
+            }
+          },
+          "404": {
+            "description": "invite not found"
+          }
+        }
+      }
+    },
+    "/invite/byVoluntary/{id}": {
+      "post": {
+        "tags": ["Invite"],
+        "summary": "Get invites by voluntary id",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Use for get invites by voluntary id",
+            "schema": {
+              "$ref": "#/definitions/Invite"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Invite"
+              }
+            }
+          },
+          "404": {
+            "description": "invite not found"
+          }
+        }
+      }
+    },
+    "/subscription": {
+      "post": {
+        "tags": ["Subscription"],
+        "summary": "Create new subscription",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Use to create a subscription",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          },
+          "409": {
+            "description": "this subscription already exists and is pending"
+          },
+          "404": {
+            "description": "organization or voluntary not found"
+          }
+        }
+      }
+    },
+    "/subscription/accept": {
+      "post": {
+        "tags": ["Subscription"],
+        "summary": "Accept an pending subscription",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Use for organization to accept an pending subscription",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          },
+          "404": {
+            "description": "subscription/organization/voluntary not found"
+          }
+        }
+      }
+    },
+    "/subscription/cancel": {
+      "post": {
+        "tags": ["Subscription"],
+        "summary": "Cancel an pending subscription",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Use for voluntary to cancel an pending subscription",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          },
+          "404": {
+            "description": "subscription/organization/voluntary not found"
+          }
+        }
+      }
+    },
+    "/subscription/reject": {
+      "post": {
+        "tags": ["Subscription"],
+        "summary": "Reject an pending invitation",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Use for organization to reject an pending invitation",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          },
+          "404": {
+            "description": "subscription/organization/voluntary not found"
+          }
+        }
+      }
+    },
+    "/subscription/byOrganization/{id}": {
+      "post": {
+        "tags": ["Subscription"],
+        "summary": "Get subscriptions by organization id",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Use for get subscriptions by organization id",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Subscription"
+              }
+            }
+          },
+          "404": {
+            "description": "subscription not found"
+          }
+        }
+      }
+    },
+    "/subscription/byVoluntary/{id}": {
+      "post": {
+        "tags": ["Subscription"],
+        "summary": "Get subscriptions by voluntary id",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Use for get subscriptions by voluntary id",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Subscription"
+              }
+            }
+          },
+          "404": {
+            "description": "subscription not found"
+          }
+        }
+      }
+    },
+    "/job": {
+      "post": {
+        "tags": ["Job"],
+        "summary": "Create new job register",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Use for organization to create new job",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "404": {
+            "description": "organization/voluntary not found"
+          }
+        }
+      }
+    },
+    "/job/update": {
+      "put": {
+        "tags": ["Job"],
+        "summary": "Update hours from job register",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Use for organization to register hour",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "404": {
+            "description": "job not found"
+          }
+        }
+      }
+    },
+    "/job/close": {
+      "post": {
+        "tags": ["Job"],
+        "summary": "Close an job register",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Use for organization to finish a job register",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "404": {
+            "description": "job not found"
+          }
+        }
+      }
+    },
+    "/job/byOrganization/{id}": {
+      "post": {
+        "tags": ["Job"],
+        "summary": "Get jobs by organization id",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Use for get jobs by organization id",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Job"
+              }
+            }
+          },
+          "404": {
+            "description": "job not found"
+          }
+        }
+      }
+    },
+    "/job/byVoluntary/{id}": {
+      "post": {
+        "tags": ["Job"],
+        "summary": "Get job by voluntary id",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Use for get job by voluntary id",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Job"
+              }
+            }
+          },
+          "404": {
+            "description": "job not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Voluntary": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "photo": {
+          "type": "string"
+        },
+        "birthdate": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        }
+      }
+    },
+    "Organization": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "photo": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
+        },
+        "number": {
+          "type": "number"
+        },
+        "neighborhood": {
+          "type": "string"
+        },
+        "complement": {
+          "type": "string"
+        }
+      }
+    },
+    "Subscription": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "organization": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Organization"
+          }
+        },
+        "voluntary": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Voluntary"
+          }
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "Invite": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "organization": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Organization"
+          }
+        },
+        "voluntary": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Voluntary"
+          }
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "Job": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "organization": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Organization"
+          }
+        },
+        "voluntary": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Voluntary"
+          }
+        },
+        "hoursRegistered": {
+          "type": "number"
+        },
+        "createdAt": {
+          "type": "Date"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
