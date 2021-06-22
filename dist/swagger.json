@@ -25,7 +25,7 @@
             "description": "API for organization (entities) invite voluntaries for job"
         },
         {
-            "name": "Subscribe",
+            "name": "Subscription",
             "description": "API for voluntaries subscribe on Job of organization"
         },
         {
@@ -418,7 +418,7 @@
             }
         },
         "/invite/byOrganization/{id}": {
-            "post": {
+            "get": {
                 "tags": ["Invite"],
                 "summary": "Get invites by organization id",
                 "parameters": [
@@ -448,7 +448,7 @@
             }
         },
         "/invite/byVoluntary/{id}": {
-            "post": {
+            "get": {
                 "tags": ["Invite"],
                 "summary": "Get invites by voluntary id",
                 "parameters": [
@@ -589,7 +589,7 @@
             }
         },
         "/subscription/byOrganization/{id}": {
-            "post": {
+            "get": {
                 "tags": ["Subscription"],
                 "summary": "Get subscriptions by organization id",
                 "parameters": [
@@ -619,7 +619,7 @@
             }
         },
         "/subscription/byVoluntary/{id}": {
-            "post": {
+            "get": {
                 "tags": ["Subscription"],
                 "summary": "Get subscriptions by voluntary id",
                 "parameters": [
@@ -730,7 +730,7 @@
             }
         },
         "/job/byOrganization/{id}": {
-            "post": {
+            "get": {
                 "tags": ["Job"],
                 "summary": "Get jobs by organization id",
                 "parameters": [
@@ -760,7 +760,7 @@
             }
         },
         "/job/byVoluntary/{id}": {
-            "post": {
+            "get": {
                 "tags": ["Job"],
                 "summary": "Get job by voluntary id",
                 "parameters": [

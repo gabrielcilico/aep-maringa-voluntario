@@ -25,7 +25,7 @@
       "description": "API for organization (entities) invite voluntaries for job"
     },
     {
-      "name": "Subscribe",
+      "name": "Subscription",
       "description": "API for voluntaries subscribe on Job of organization"
     },
     {
